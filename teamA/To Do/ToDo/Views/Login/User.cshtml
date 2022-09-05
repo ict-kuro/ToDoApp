@@ -1,0 +1,74 @@
+﻿@model ToDo.Models.UserTable
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToDo</title>
+</head>
+<body>
+    <header class="User_header">
+        <div>
+            <h1 class="login_container">新規ユーザー登録</h1>
+        </div>
+        <div class="today">
+            <span class="Log">
+                <script language="JavaScript" type="text/javascript">
+                    // 日付けをつける
+                    var today = new Date();
+                    var year = today.getFullYear();
+                    var month = today.getMonth() + 1;
+                    var day = today.getDate();
+
+                    document.write(year + "年" + month + "月" + day + "日");
+                </script>
+            </span>
+            <p id="Realtime" class="realtime"></p>
+        </div>
+
+        <script language="JavaScript" type="text/javascript">
+            function showClock() {
+                let nowTime = new Date();
+                let nowHour = nowTime.getHours();
+                let nowMin = nowTime.getMinutes();
+                let nowSec = nowTime.getSeconds();
+
+
+                let msg = nowHour + "時" + nowMin + "分" + nowSec + "秒";
+                document.getElementById("Realtime").innerHTML = msg;
+            }
+            setInterval('showClock()', 1000);
+        </script>
+    </header>
+    <main id="login">
+        <form asp-action="AddUser" mathod="post" name="login_form">
+            <div class="form_login">
+                <div class="form_input">
+                    <p>ID</p>
+                    <input type="text" asp-for="UserId" placeholder="Username" /><br>
+                </div>
+                <div class="form_input">
+                    <p>Password</p>
+                    <input type="password" asp-for="Password" placeholder="Password" />
+                </div>
+                <font style="color:red">@ViewData["message"]</font>
+            </div> 
+            <div class="btn-design">
+                <input type="submit" name="touroku-btn" class="User-btn" value="登録" />
+                <a href="Index" class="btn_User">戻る</a>
+            </div>
+        </form>
+
+    </main>
+
+
+</body>
+</html>
+

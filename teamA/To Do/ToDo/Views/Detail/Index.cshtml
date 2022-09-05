@@ -1,0 +1,273 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToDo</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dict/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/jquery/dict/jquery.min.js" />
+    <link rel="stylesheet" href="~/lib/jquery/dict/jquery.js" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined"
+          rel="stylesheet" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        screen and (max-width:768px) {
+            body
+
+        {
+            font-size: 62.5%;
+        }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- この下からタスク画面-->
+    <header class="Task_header">タスク詳細</header>
+
+    <div class="today">
+        <script language="JavaScript" type="text/javascript">
+            // 日付けをつける
+            var today = new Date();
+            var time = new Date();
+            var year = today.getFullYear();
+            var month = today.getMonth() + 1;
+            var week = today.getDay();
+            var day = today.getDate();
+            var hour = time.getHours();
+            var minute = time.getMinutes();
+
+            document.write(year + "年" + month + "月" + day + "日");
+            document.write(hour + "時", +minute + "分");
+        </script>
+
+    </div>
+
+    <form asp-action="Add" method="post" class="task-form">
+        <div class="task_menu_all">
+            <div class="task-label"></div>
+            <div class="task_menu">
+                <p>タスク名：</p>
+                <div class="event-name"></div> <!--タスク名表示-->
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <p> 開始日時：</p>
+                <div class="event-start"></div> <!--タスク開始時間表示-->
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <p>  終了日時：</p>
+                <div class="event-stop"></div> <!--タスク終了時間表示-->
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <p> コメント：</p>
+                <div class="event-coment"></div> <!--タスクコメント表示-->
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <p> 優先順位：</p>
+                <div class="event-number"></div> <!--タスク順位表示-->
+                <br><br>
+            </div>
+
+            
+        </div>
+
+        <div class="task_btn">
+            <input type="submit" name="clear" value="完了" class="btn-task">&ensp;
+            <input type="submit" name="update" value="更新" class="btn-task">&ensp;
+            <input type="submit" name="delete" value="削除" class="btn-task">
+        </div>
+
+    </form>
+
+    <form method="post">
+        <!--テーブルにデータがあるか判定-->
+        @if(Model.IdList != null)
+         {
+            <!--テーブル作成-->
+            <table border="1">
+                <tr>
+                    <th style="width: 150px;">選択</th>
+                    <th style="width: 150px;">商品名</th>
+                    <th style="width: 150px;">金額</th>
+                </tr>
+                <!--DB内の商品名金額すべて一行づつ表示-->
+                @for (var i = 0; i < @Model.IdList.Count; i++)
+                 {
+                    <tr>
+                        <!--レコードの数分チェックボタン表示(複数選択可)-->
+                        <th style="width: 150px;"><input type="checkbox" name="choice" value="@Model.IdList[i]" /></th>
+                        <th style="width: 150px;">@Model.ProductList[i]</th>
+                        <th style="width: 150px;">@Model.PriceList[i]</th>
+                    </tr>
+                 }
+            </table>
+         }
+    </form>
+
+
+    <!-- この下からサイドメニューバー-->
+    <!-- サイドメニュー領域 -->
+    <div class="side-menu">
+        <b class="task_title">タスク一覧</b><br><br><br>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <p>●<div class="task_text"></div></p>
+        <div class="side-menu-button">- Open -</div>
+
+        <style>
+            .side-menu-button {
+                cursor: pointer;
+            }
+
+                .side-menu-button:hover {
+                    opacity: 0.7;
+                }
+        </style>
+
+        <form asp-action="AddTask" method="post" name="AddTask">
+            <div class="touroku_btn">
+                <input type="submit" name="AddTask" class="btn-circle" value="+" />
+            </div>
+        </form>
+
+    </div>
+
+    <!-- サイドメニュー表示時の他領域を隠す用 -->
+    <div class="hide-contents"></div>
+
+    <main class="main-contents">
+        <div id='calendar'></div>
+    </main>
+
+
+    <script type="text/javascript">
+        $(function () {
+
+            var isOpenSideMenu = false;  // 現在サイドメニューを開いているか
+            var durationSideMenu = 300;　// サイドメニュー開閉にかける時間
+            var durationSideMenuContents = 100; // サイドメニュー項目変化にかける時間
+
+            // サイドメニューを開く処理
+            function showSideMenu() {
+                $(".side-menu").animate(
+                    {
+                        "left": "0px"
+                    },
+                    durationSideMenu
+                );
+                $(".hide-contents")
+                    .css("display", "block")
+                    .animate(
+                        {
+                            "opacity": "0.5"
+                        },
+                        durationSideMenu);
+                isOpenSideMenu = true;
+            }
+
+            // サイドメニューを閉じる処理
+            function hideSideMenu() {
+                $(".side-menu").animate(
+                    {
+                        "left": "-300px"
+                    },
+                    durationSideMenu
+                );
+                $(".hide-contents").animate(
+                    {
+                        "opacity": "0"
+                    },
+                    durationSideMenu,
+                    function () {
+                        $(".hide-contents").css("display", "none");
+                    });
+                isOpenSideMenu = false;
+            }
+
+            // コンテンツを切り替える処理
+            function changeContents(contentsClass) {
+                $(".main-contents .contents").css("display", "none");
+                $(".main-contents ." + contentsClass).css("display", "block");
+            }
+
+            // サイドメニューボタンをクリックした際のイベント登録
+            $(".side-menu-button").on("click", function () {
+                if (!isOpenSideMenu) {
+                    showSideMenu();
+                } else {
+                    hideSideMenu();
+                }
+            });
+
+            // 非表示領域をクリックした際のイベント登録
+            $(".hide-contents").on("click", hideSideMenu);
+
+            // サイドメニューの項目に関するイベント登録
+            $(".side-menu ul li:not(.has-child-menu)")
+                // カーソルを重ねた時
+                .on("mouseover", function () {
+                    $(this).stop(true).animate(
+                        {
+                            "background-color": "aqua"
+                        },
+                        durationSideMenuContents
+                    );
+                })
+                // カーソルを離した時
+                .on("mouseout", function () {
+                    $(this).stop(true).animate(
+                        {
+                            "background-color": "#EEEEEE"
+                        },
+                        durationSideMenuContents
+                    );
+                })
+                // クリックした時
+                .on("click", function (event) {
+                    var contentsClass = event.target.className;
+                    changeContents(contentsClass);
+                    hideSideMenu();
+                });
+        });
+            
+    </script>
+</body>
+</html>
+

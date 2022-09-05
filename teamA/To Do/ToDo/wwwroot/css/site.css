@@ -1,0 +1,676 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+.container{
+    min-height:100%;
+}
+
+
+/* この下はHomeのデザイン*/
+/* ページ全体 */
+body {
+    margin: 0;
+    font-family: "Avenir Next";
+}
+
+/* ヘッダー */
+.Home_header {
+    width: 100%;
+    height: 100px;
+    margin: 0 0 50px 0;
+    background-image: linear-gradient(45deg, #99FF99 0%, #99CC66 100%);
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+}
+.title{
+    margin-top:10px;
+    font-size:50px;
+    font-weight:bold;
+}
+.detail_title{
+    margin:10px auto;
+    font-size:50px;
+    font-weight:bold;
+}
+
+.main-contents{
+    width:100%;
+}
+.today {
+    font-size: 18px;
+    color: black;
+    display: flex;
+    align-items: flex-end;
+    flex-direction:column;
+    margin-right:20px;
+}
+
+
+/* サイドメニュー領域 */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #99CC66;
+    z-index: 999;
+
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+
+
+/* サイドメニュー内、上部テキストの設定 */
+.task_title {
+    text-align: center;
+    font-size: 34px;
+    margin:20px 20px auto 0;
+}
+.side-menu p{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+/* サイドメニューの開閉ボタンの設定 */
+.side-menu-button {
+    position: absolute;
+    top: 40%;
+    left: 300px;
+    margin: 0;
+    padding: 1.2rem;
+    background-image: linear-gradient(45deg, #99FF99 0%, #33CC33 100%);
+    writing-mode: vertical-rl;
+    color: black;
+    font-size: 25px;
+}
+
+/* サイドメニュー表示時に隠すためのブロックの設定 */
+.hide-contents {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    z-index: 998;
+}
+
+/*タスクボタンのデザイン*/
+.touroku_btn {
+    margin:150px 30px 0 auto;
+    display:flex;
+    justify-content:flex-end;
+}
+.btn-circle {
+    display: inline-block;
+    text-decoration: none;
+    background: #FFF;
+    color: #99CC66;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    border-radius: 50%;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    overflow: hidden;
+    transition: .4s;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #bd6565;
+    border:none;
+}
+.btn-circle-3d:active {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.15);
+    border-bottom: none;
+}
+.btn-circle:hover{
+    opacity:0.7;
+}
+
+/* 最初に表示しない項目の設定 */
+.contents:not(.default-contents) {
+    display: none;
+}
+
+
+
+
+
+/*この下はログイン画面と新規登録画面のデザイン*/
+.login_header {
+    width: 100%;
+    height: 100px;
+    margin: 0 0 100px 0;
+    background-image: linear-gradient(45deg, #99FF99 0%, #99CC66 100%);
+    padding-top: 20px;
+}
+.User_header {
+    width: 100%;
+    height: 120px;
+    margin: 0 0 50px 0;
+    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+    padding-top: 20px;
+}
+.login_container{
+    font-size:65px;
+    font-weight:bold;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login_today {
+    font-size: 18px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    margin-top:50px;
+}
+.form_login {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction:column;
+
+}
+.form_input {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin-top:10px;
+}
+    .form_input p {
+        font-size: 25px;
+        font-weight:bold;
+        display: flex;
+        align-items: center;
+    }
+    .form_input input{
+        width:250%;
+    }
+
+
+.btn-design{
+   display:flex;
+   justify-content:center;
+   flex-direction:row;
+}
+
+/*ログイン画面のボタン*/
+.login-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #99FF99 0%, #33CC33 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin: 100px 30px 0 0;
+    border: none;
+}
+
+    .login-btn:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+    .login-btn:hover{
+        opacity:0.7;
+    }
+
+.btn_login {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin-top: 100px;
+    font-weight: bold;
+    border: none;
+}
+
+    .btn_login:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .btn_login:hover {
+        opacity: 0.7;
+    }
+
+
+/*新規登録画面のボタン*/
+.User-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin: 100px 20px 0 0;
+    border:none;
+}
+
+    .User-btn:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .User-btn:hover {
+        opacity: 0.7;
+    }
+
+.btn_User {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin-top: 100px;
+    font-weight: bold;
+    border: none;
+}
+
+    .btn_User:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .btn_User:hover {
+        opacity: 0.7;
+    }
+
+
+/* この下から」タスク登録画面のデザイン */
+.Task_header {
+    width: 100%;
+    height: 100px;
+    margin: 0 0 20px 0;
+    background-color: #99CC66;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+}
+
+
+.task-form{
+    margin-top:100px;
+}
+.task_menu_all {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.task_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    vertical-align: middle;
+    margin-left: 450px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.task_menu input{
+    width:50%;
+}
+
+.task_btn{
+    display:flex;
+    justify-content:flex-start;
+    flex-direction:row;
+    align-content:center;
+    align-items:center;
+}
+
+/*登録画面のボタン*/
+.btn-task {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #99FF99 0%, #33CC33 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 90px 0 0 1100px;
+    border: none;
+}
+
+    .btn-task:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .btn-task:hover {
+        opacity: 0.7;
+    }
+
+.btn-return {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin-top: 90px;
+    margin-left: 30px;
+    font-size: 18px;
+    border: none;
+}
+
+    .btn-return:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .btn-return:hover {
+        opacity: 0.7;
+    }
+
+.task_color {
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
+
+/*ハンバーガーメニュー*/
+.btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: solid 1px #26344a;
+    cursor: pointer;
+}
+
+.btn_text {
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+.btn_menu {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background: #26344a;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition: all 0.5s;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+    .btn_menu::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #26344a;
+        transition: all 0.5s;
+    }
+
+    .btn_menu::after {
+        display: block;
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #26344a;
+        transition: all 0.5s;
+    }
+
+    
+
+
+
+.btn {
+    margin:10px 600px 0 10px;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+.btn_text {
+    font-size: 25px;
+    font-weight: bold;
+}
+.a-task-menu{
+    font-size:18px;
+    font-weight:bold;
+    margin-left:10px;
+    color:black;
+}
+
+
+/*詳細画面*/
+.update-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #99FF99 0%, #33CC33 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 70px 0 0 1100px;
+    border: none;
+}
+
+    .update-btn:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .update-btn:hover {
+        opacity: 0.7;
+    }
+
+.clear-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 20px 0 0 1100px;
+    border: none;
+}
+
+    .clear-btn:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .clear-btn:hover {
+        opacity: 0.7;
+    }
+
+.delete-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    border-radius: 4px;
+    color: #ffffff;
+    background-image: linear-gradient(#6795fd 0%, #67ceff 100%);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+    border-bottom: solid 3px #c58668;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-left:1100px;
+    font-size:18px;
+    border: none;
+}
+
+    .delete-btn:active {
+        -webkit-transform: translateY(4px);
+        transform: translateY(4px);
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+        border-bottom: none;
+    }
+
+    .delete-btn:hover {
+        opacity: 0.7;
+    }
+
+
+
+/*ポップアップ*/
+
+.bg_onetime_popup {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s;
+}
+
+    .bg_onetime_popup.js_active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+
+.onetime_popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 50%;
+    min-width: 500px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.onetime_popup_title {
+    position: relative;
+    padding: 30px 70px;
+    margin: 0px;
+    background-image: linear-gradient(45deg, #99FF99 0%, #99CC66 100%);
+    color: #fff;
+    font-size: 42px;
+    font-weight:bold;
+    text-align: center;
+    line-height: 1.5;
+}
+
+    .onetime_popup_title::before,
+    .onetime_popup_title::after {
+        position: absolute;
+        top: 50%;
+        right: 30px;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 4px;
+        background-color: #fff;
+        content: "";
+    }
+
+    .onetime_popup_title::before {
+        transform: rotate(45deg);
+    }
+
+    .onetime_popup_title::after {
+        transform: rotate(-45deg);
+    }
+
+.onetime_popup_content {
+    
+    margin:20px 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items:center;
+    font-size:18px;
+    font-weight:bold;
+}
+.alert-text{
+    margin-right:5px;
+}
+

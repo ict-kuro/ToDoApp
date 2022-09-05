@@ -1,0 +1,72 @@
+﻿@model ToDo.ViewModels.LoginForm
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToDo</title>
+</head>
+<body>
+    <header class="login_header">
+        <div>
+            <h1 class="login_container">ログイン画面</h1>
+        </div>
+        <div class="today">
+            <span class="Log">
+                <script language="JavaScript" type="text/javascript">
+                    // 日付けをつける
+                    var today = new Date();
+                    var year = today.getFullYear();
+                    var month = today.getMonth() + 1;
+                    var day = today.getDate();
+
+                    document.write(year + "年" + month + "月" + day + "日");
+                </script>
+            </span>
+            <p id="Realtime" class="realtime"></p>
+        </div>
+
+        <script language="JavaScript" type="text/javascript">
+            function showClock() {
+                let nowTime = new Date();
+                let nowHour = nowTime.getHours();
+                let nowMin = nowTime.getMinutes();
+                let nowSec = nowTime.getSeconds();
+
+
+                let msg = nowHour + "時" + nowMin + "分" + nowSec + "秒";
+                document.getElementById("Realtime").innerHTML = msg;
+            }
+            setInterval('showClock()', 1000);
+        </script>
+    </header>
+    <main id="login">
+        <form asp-action="Login" method="post">
+            <div class="form_login">
+                <div class="form_input">
+                    <p>ID</p>
+                    <input asp-for="UserId" type="text"/><br>
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form_input">
+                    <p>Password</p>
+                    <input asp-for= "Password"  type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <font style="color:red">@ViewData["message"]</font>
+            </div>
+            <div class="btn-design">
+                <input type="submit" name="Login" class="login-btn" value="ログイン" />
+        </form>
+        <form asp-action="Adduser_mode" method="post">
+            <input type="submit" class="btn_login" value="新規登録 ">
+        </form>
+        </div>        
+
+    </main>
+
+
+</body>
+</html>

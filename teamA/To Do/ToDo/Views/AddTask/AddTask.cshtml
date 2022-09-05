@@ -1,0 +1,141 @@
+﻿@model ToDo.ViewModels.AddTaskForm
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToDo</title>
+    
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 1020px;
+            width: 100%;
+        }
+
+        screen and (max-width:768px) {
+            body
+
+        {
+            font-size: 62.5%;
+        }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- この下からタスク画面-->
+    <header class="Home_header">
+        <h1 class="detail_title">タスク登録</h1>
+    </header>
+
+    <div class="today">
+        <span class="Log">
+            <script language="JavaScript" type="text/javascript">
+                // 日付けをつける
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = today.getMonth() + 1;
+                var day = today.getDate();
+
+                document.write(year + "年" + month + "月" + day + "日");
+            </script>
+        </span>
+        <p id="Realtime" class="realtime"></p>
+    </div>
+
+    <script language="JavaScript" type="text/javascript">
+        function showClock() {
+            let nowTime = new Date();
+            let nowHour = nowTime.getHours();
+            let nowMin = nowTime.getMinutes();
+            let nowSec = nowTime.getSeconds();
+
+
+            let msg = nowHour + "時" + nowMin + "分" + nowSec + "秒";
+            document.getElementById("Realtime").innerHTML = msg;
+        }
+        setInterval('showClock()', 1000);
+    </script>
+
+    <form asp-action="Add" method="post" class="task-form">
+        <div class="task_menu_all">
+            <div class="task_menu">
+                <label asp-for="TaskName">タスク名：</label>
+                <input type = "text" asp-for="TaskName" size=50 placeholder="40文字以内で入力してください" > <!--タスク名登録-->
+                <span asp-validation-for="TaskName" class="text-danger"></span>
+                <br><br>
+            </div>
+       
+            <div class="task_menu">
+                <label asp-for="StartTime"> 開始日時：</label>
+                <input type="datetime-local" asp-for="StartTime">&ensp; <!--開始日時登録-->
+                <span asp-validation-for="StartTime" class="text-danger"></span>
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <label asp-for="FinishTime">  終了日時：</label>
+                <input type="datetime-local" asp-for="FinishTime">&ensp; <!--終了日時登録-->
+                <span asp-validation-for="FinishTime" class="text-danger"></span>
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <label asp-for="Comment"> コメント：</label>
+                <input type="text" asp-for="Comment" placeholder="100文字以内で入力してください" size=50> <!--コメント入力-->
+                <span asp-validation-for="Comment" class="text-danger"></span>
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <label asp-for="MyPriority"> 優先順位：</label>
+                <select asp-for="MyPriority">
+                    <!--優先順位登録-->
+                    <option value="高">高</option>
+                    <option value="中">中</option>
+                    <option value="低">低</option>
+                </select>
+                <span asp-validation-for="MyPriority" class="text-danger"></span>
+                <br><br>
+            </div>
+
+            <div class="task_menu">
+                <div class="task_color">
+                    <label asp-for="TaskName">色：</label>
+                    <select asp-for="ColorId">
+                        <option value="red">赤</option>
+                        <option value="blue">青</option>
+                        <option value="yellow">黄</option>
+                        <option value="green">緑</option>
+                        <option value="pink">ピンク</option>
+                        <option value="light blue">水色</option>
+                        <option value="orange">オレンジ</option>
+                        <option value="purple">紫</option>
+                    </select>&ensp;
+                    <span asp-validation-for="ColorId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="task_btn">
+            <input type="submit" name="send" value="タスクを追加" class="btn-task" id="btn-task">&ensp;
+    </form>
+    <form asp-action="HomeBack" method="post">
+        <input type="submit" value="戻る" class="btn-return">
+    </form>
+        </div>
+</body>
+</html>
+

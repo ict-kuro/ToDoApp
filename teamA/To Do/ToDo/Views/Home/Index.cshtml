@@ -1,0 +1,239 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<ToDo.ViewModels.TaskForm>
+
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - ToDo</title>
+
+
+    <meta charset='utf-8' />
+    <link href='~/lib/fullcalendar-5.11.3/lib/main.css' rel='stylesheet'>
+    <script src='~/lib/fullcalendar-5.11.3/lib/main.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    
+
+
+    <script>
+        var tasks = '@Url.Action("GetAllTasks")'
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                navLinks: true,
+                businessHours: true,
+                editable: true,
+                locale: 'ja',
+                events:'@Url.Action("GetAllTasks")',
+                eventClick: function (info) {
+                    alert('Event: ' + info.event.url);
+
+                    // change the border color just for fun
+                    info.el.style.borderColor = 'red';
+
+                    window.location.href = info.event.url;
+                }
+
+
+            });
+            calendar.render();
+        });
+
+    </script>
+
+
+</head>
+
+<body>
+
+
+    
+    <header class="Home_header">
+        <!-- サイドバーの開閉ボタン -->
+        <div class="btn" id="button">
+            <button class="btn_menu" type="button">
+                <span class="btn_text" id="btn_text">- Open -</span>
+            </button>
+        </div>
+        
+        
+        <h1 class="title">Task Calender</h1>
+    </header>
+    <div class="today">
+        <span class="Log">
+            <script language="JavaScript" type="text/javascript">
+                // 日付けをつける
+                var today = new Date();
+                var year = today.getFullYear();
+                var month = today.getMonth() + 1;
+                var day = today.getDate();
+
+                document.write(year + "年" + month + "月" + day + "日");
+            </script>
+        </span>
+        <p id="Realtime" class="realtime"></p>         
+    </div>
+
+    <script language="JavaScript" type="text/javascript">
+        function showClock() {
+            let nowTime = new Date();
+            let nowHour = nowTime.getHours();
+            let nowMin = nowTime.getMinutes();
+            let nowSec = nowTime.getSeconds();
+
+
+            let msg = nowHour + "時" + nowMin + "分" + nowSec + "秒";
+            document.getElementById("Realtime").innerHTML = msg;
+        }
+        setInterval('showClock()', 1000);
+    </script>
+
+
+
+    <div class="bg_onetime_popup">
+        <div class="onetime_popup">
+            <p class="onetime_popup_title">残りタスク</p>
+            <div class="onetime_popup_content">
+                <p class="alert-text">@ViewData["TaskAlert"] </p>
+                <img src="@ViewData["PngAlert"]" width="120" height="120" />
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript"> 
+       window.addEventListener('load', function () {
+           if (!sessionStorage.getItem('disp_popup')) {
+                sessionStorage.setItem('disp_popup', 'on');
+                var popup = document.getElementsByClassName('bg_onetime_popup');
+                popup[0].classList.add('js_active');
+                popup[0].onclick = function () {
+                    popup[0].classList.remove('js_active');
+                }
+            }
+        }, false);
+        
+    </script>
+
+
+
+    
+    
+
+    <!-- サイドメニュー領域 -->
+ 
+    <div class="side-menu" id="side-menu">
+        <b class="task_title">タスク一覧</b><br><br><br>
+        
+        @foreach(var item in Model)
+        {
+            <a class="a-task-menu" asp-action="Detail" asp-route-id="@item.TaskId">@item.Priority : @item.TaskName</a><br><br>
+        }
+
+       
+    
+        <form asp-action="AddTask" method="post" name="AddTask">
+            <div class="touroku_btn">
+                <input type="submit" name="AddTask" class="btn-circle" value="+" />
+            </div>
+        </form>
+    </div>
+
+    
+    
+
+    <!-- サイドメニュー表示時の他領域を隠す用 -->
+    <div class="hide-contents"></div>
+
+    <main class="main-contents">
+        <div id='calendar'></div>
+    </main>
+
+
+    <script type="text/javascript">
+        
+
+
+        $(function () {
+
+            var isOpenSideMenu = false;  // 現在サイドメニューを開いているか
+            var durationSideMenu = 300;　// サイドメニュー開閉にかける時間
+            var durationSideMenuContents = 100; // サイドメニュー項目変化にかける時間
+
+            // サイドメニューを開く処理
+            function showSideMenu() {
+                
+                $(".side-menu").animate(
+                    {
+                        "left": "0px"
+                    },
+                    durationSideMenu
+                );
+                $(".hide-contents")
+                    .css("display", "block")
+                    .animate(
+                        {
+                            "opacity": "0.5"
+                        },
+                        durationSideMenu);
+                isOpenSideMenu = true;
+            }
+
+            // サイドメニューを閉じる処理
+            function hideSideMenu() {
+                
+                $(".side-menu").animate(
+                    {
+                        "left": "-300px"
+                    },
+                    durationSideMenu
+                );
+                $(".hide-contents").animate(
+                    {
+                        "opacity": "0"
+                    },
+                    durationSideMenu,
+                    function () {
+                        $(".hide-contents").css("display", "none");
+                    });
+                isOpenSideMenu = false;
+            }
+
+            // コンテンツを切り替える処理
+            function changeContents(contentsClass) {
+                $(".main-contents .contents").css("display", "none");
+                $(".main-contents ." + contentsClass).css("display", "block");
+            }
+
+            // サイドメニューボタンをクリックした際のイベント登録
+            $(".btn").on("click", function () {
+                if (!isOpenSideMenu) {
+                    showSideMenu();
+                    
+                } else {
+                    hideSideMenu();
+                }
+            });
+
+            // 非表示領域をクリックした際のイベント登録
+            $(".hide-contents").on("click", hideSideMenu);
+
+            
+        });
+    </script>
+
+
+
+</body>
+</html>
