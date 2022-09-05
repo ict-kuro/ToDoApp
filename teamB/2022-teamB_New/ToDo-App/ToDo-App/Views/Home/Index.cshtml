@@ -1,0 +1,26 @@
+﻿@model ToDo_App.ViewModels.LoginForm
+@*
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+</head>
+<body>
+  <h3 style="text-align: center;">ログイン画面</h3>
+  <div class="login">
+     <div class="login_form">
+        <form asp-action="Login" method="post" class="login_input">
+           <p>ユーザーID: <input asp-for="UserId" placeholder="ユーザーID"></p>
+           <span asp-validation-for="UserId" class="text-danger"></span>
+           <p>パスワード: <input asp-for="Password" placeholder="パスワード"></p>
+           <span asp-validation-for="Password" class="text-danger"></span>
+           <!--<p>パスワード再入力: <input type="password" placeholder="パスワードの再入力" name="password_temp"></p>-->
+           <input type="submit" value="ログイン" class="login_button">
+        </form>
+        <p style="color: red">@ViewData["message"]</p>
+        <p></p>
+        <a asp-controller="/LoginRegister" asp-action="Index">新規登録の方はこちらへ</a>
+     </div>
+  </div>
+</body>

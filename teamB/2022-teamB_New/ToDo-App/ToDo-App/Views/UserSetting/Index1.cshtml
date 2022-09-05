@@ -1,0 +1,46 @@
+﻿@*
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<head>
+</head>
+<body>
+  <h3 style="text-align: center;">ユーザー設定画面</h3>
+  <!--<div class="login">
+     <div class="login_form">
+        <form asp-action="Login" method="post" class="login_input">
+           <p>ユーザーID: <input type="username" placeholder="ユーザーID" name="username"></p>
+           <p>パスワード: <input type="password" placeholder="パスワード" name="password"></p>
+           <p>パスワード再入力: <input type="password" placeholder="パスワードの再入力" name="password_temp"></p>
+           <input type="submit" value="ログイン" class="login_button">
+        </form>
+        <p style="color: red">@ViewData["message"]</p>
+        <p></p>
+        <a asp-controller="/LoginRegister" asp-action="Index">新規登録の方はこちらへ</a>
+     </div>
+  </div>-->
+  <br>
+  <p>現在のユーザーID:</p>
+  <p></p>
+  <p>期限切れのタスクを表示する期間:
+      <!--<form asp-action="UserSetting" method="post">
+          <select name="task_term">
+              <option hidden>選択してください</option>
+              <option value="term">3ヶ月後</option>
+              <option value="term">6ヶ月後</option>
+              <option value="term">1年後</option>
+          </select>
+      </form>-->
+   <div class="select-group">
+       <form asp-action="UserSetting">
+         <select class="select-control">
+            <option value="3months">3ヶ月</option>
+            <option value="6months">6ヶ月</option>
+            <option value="year">1年</option>
+         </select>
+       </form>
+   </div>
+  </p>
+  
+</body>

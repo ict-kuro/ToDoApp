@@ -1,0 +1,61 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @using Microsoft.AspNetCore.Http;
+}
+
+@if(ViewData["SessionUserId"] == null){
+    <body>
+        <p>ログインが必要なページです。</p>
+        <a asp-controller="/Login" asp-action="Index">ログインはこちらから</a>
+    </body>
+}
+@if(ViewData["SessionUserId"] != null){
+
+<body>
+    <p>ユーザーID:@ViewData["SessionUserId"]</p>
+    <h1 style="text-align:center">現在のタスク一覧</h1>
+    <hr>
+    <div class="button_style">
+        <button type="button"  style="text-align:center" onclick="location.href='@Url.Action("Index", "Register")'">新規タスク登録</button>
+        <button type="button"  style="text-align:center" onclick="location.href='@Url.Action("Index", "Display")'">タスクカレンダー</button>
+        <button type="button"  style="text-align:center" onclick="location.href='@Url.Action("Task_Result", "Display")'">完了タスク表示</button>
+    </div>
+    @using(Html.BeginForm("Index","Display"))
+    {
+        <div class="button_style">
+          <button type="submit" >表示タスクをソートする</button>
+          <select name="sortid">
+              <option value="deadlineDec">完了期限が近い順</option>
+              <option value="deadlineAsc">完了期限が遠い順</option>
+              <option value="priority">優先度順</option>
+              <option value="registDec">登録日が新しい順</option>
+          </select>
+        </div>
+    }
+    <br>
+    @using(Html.BeginForm("Task_Comp","Display"))
+    {
+        <div class="button_style">
+                <button type="submit">選択したタスクを完了する</button>
+        </div>
+        <br>
+        @*コントローラーから渡されたタスクリストを列挙*@
+        @*各タスクがクリックされるとタスク詳細画面へそのタスクIDを渡す*@
+        @foreach(var item in Model){
+            @*タスクが完了した場合のチェックボックス*@
+                @*<input type="checkbox" class="checkbox_style" name="comp" value="@item.TaskId">*@
+            <div style="text-align: center;">
+              <input type="checkbox" class="checkbox_style" name="comp" value="@item.TaskId">
+              <a asp-action="Task_det" asp-route-id="@item.TaskId" class="btn btn-primary">
+              タスク期限:@item.DeadlineDate <br>
+              タスク名:@item.Taskname
+              </a>
+            </div>
+            <br>
+        }
+    }
+
+ </body>
+}

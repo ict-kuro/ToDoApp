@@ -1,0 +1,69 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@if (ViewData["SessionUserId"] == null)
+{
+    <body>
+        <p>ログインが必要なページです。</p>
+        <a asp-controller="/Login" asp-action="Index">ログインはこちらから</a>
+    </body>
+}
+
+@if(ViewData["SessionUserId"] != null)
+{
+ 
+    <body>
+        <p>ユーザーID:@ViewData["SessionUserId"]</p>
+        <h1 style="text-align:center">完了タスク一覧</h1>
+        <hr>
+        <div class="button_style">
+          <button type="button" style="text-align:center" onclick="location.href='@Url.Action("Index", "Display")'">新規タスク登録</button>
+          <button type="button" style="text-align:center" onclick="location.href='@Url.Action("Index", "Display")'">タスクカレンダー</button>
+          <button type="button" style="text-align:center" onclick="location.href='@Url.Action("Index", "Display")'">現在のタスク一覧へ</button>
+        </div>
+        <br>
+
+        <h1 style="text-align:center">今月のタスク完了率<span style="color: orange;">@ViewData["TaskRatio"]</span> %</h1>
+        <script type="text/javascript">
+            window.addEventListener('load', function () {
+                if (@ViewData["TaskRatio"] >= 100) {
+                    var achieve_text = document.getElementById("achievement");
+                    achievement.innerHTML = "EXCELLENT!! あなたは計画通りに物事をこなす天才です！！";
+                }
+                else if (@ViewData["TaskRatio"] >= 80){
+                    var achieve_text = document.getElementById("achievement");
+                    achievement.innerHTML = "GREAT!! あなたはほとんどのタスクをこなしています！";
+                }
+                else if (@ViewData["TaskRatio"] >= 50){
+                    var achieve_text = document.getElementById("achievement");
+                    achievement.innerHTML = "GOOD!! この調子でタスクをこなしていきましょう！";
+                }
+                else if (@ViewData["TaskRatio"] >= 30 ){
+                    var achieve_text = document.getElementById("achievement");
+                    achievement.innerHTML = "OK!! タスクをこなすペースを上げていきましょう！";
+                }
+                else{
+                    var achieve_text = document.getElementById("achievement");
+                    achievement.innerHTML = "Not Bad！集中してタスクをこなしましょう!";
+                }
+            })
+        </script>
+        <h2 style="text-align: center" id="achievement" class="achieve-font"></h2>
+        <h2 style="text-align:center">今月が期限の残りタスクは @ViewData["NotResultTasks"]個です</h2>
+
+        @*コントローラーから渡された完了しているタスクリストを列挙*@
+        @*各タスクがクリックされるとタスク詳細画面へそのタスクIDを渡す*@
+        @foreach (var item in Model)
+        {
+            <div style="text-align: center;">
+              <a asp-action="Task_det" asp-route-id="@item.TaskId" class="btn btn-primary">
+                タスク期限:@item.DeadlineDate <br>
+                タスク名:@item.Taskname
+              </a>
+            </div>
+            <br>
+        }
+    </body>
+}

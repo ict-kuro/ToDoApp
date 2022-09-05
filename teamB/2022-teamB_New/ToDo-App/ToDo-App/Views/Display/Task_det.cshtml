@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+}
+@if(ViewData["SessionUserId"] == null){
+    <body>
+        <p>ログインが必要なページです。</p>
+        <a asp-controller="/Login" asp-action="Index">ログインはこちらから</a>
+    </body>
+}
+@if (ViewData["TaskId"] == null && ViewData["SessionUserId"] != null)
+{
+    <body>
+        <p>不正なページ移動です</p>
+        <a asp-controller="/Display" asp-action="Index">タスク一覧画面へ戻る</a>
+    </body>
+}
+@if (ViewData["SessionUserId"] != null && ViewData["TaskId"] != null)
+{
+
+<body>
+    <h1>タスク詳細</h1>
+    <hr>
+        <p style="text-align:center;font-weight:bold">タスク名:@Model.Taskname</p>
+        <p style="text-align:center;font-weight:bold">タスク開始日:@Model.StartDate</p>
+    <p style="text-align:center; font-weight:bold">タスク期限:@Model.DeadlineDate</p>
+        <p style="text-align:center; font-weight:bold">登録日:@Model.RegisterDate</p>
+    <p style="text-align:center; font-weight:bold">重要度:@ViewData["Priority"]</p>
+        <p style="text-align:center; font-weight:bold">画像:</p>
+    @if(ViewData["ImagePath"] != null){
+        <div style="text-align: center">
+                <img src="@ViewData["ImagePath"]" />
+        </div>
+    }
+    @if(ViewData["ImagePath"] == null){
+            <p style="text-align:center">画像が見つかりません</p>
+    }
+    <br>
+    <br>
+    <div style="height:10px;">
+    <span style="margin-left:8px; padding:6px 5px; background:white; font-weight:bold; border-radius:5px;">コメント</span>
+    </div>
+    <div style="border: 3px solid; padding: 40px 20px 20px 20px text-align:center">
+            <br><p>@Model.Comment</p>
+    </div>
+
+    <br>
+        <p style="text-align:center; font-weight:bold">グループ:@ViewData["Groupname"] </p>
+        <div class="button_style">
+            <button type="button" onclick="location.href='@Url.Action("Index", "UpdateDelete", new{id = ViewData["TaskId"]})'">タスク更新・削除</button>
+        </div>
+        <form asp-action="Update" method="post">
+            <input type="hidden" value="@ViewData["TaskId"]">
+            @*<input type="hidden" id="Groupname" value="@ViewData["Groupname"]">
+            <input type="hidden" id="Priority" value="@ViewData["Priority"]">
+            <input type="hidden" id="Taskname" value="@Model.Taskname">
+            <input type="hidden" id="DeadlineDate" value="@Model.DeadlineDate">
+            <input type="hidden" id="RegisterDate" value="@Model.RegisterDate">
+            <input type="hidden" id="Comment" value="@Model.Comment">*@
+        </form>
+        <p></p>
+        <div style="text-align: center;">
+          <a asp-controller="/Display" asp-action="Index">タスク一覧画面へ戻る</a>
+        </div>
+</body>
+}

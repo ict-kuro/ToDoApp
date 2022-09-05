@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.Task {
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    font-weight: bold;
+    color: #6091d3; /*•¶šF*/
+    background: #FFF;
+    border: solid 3px #6091d3; /*ü*/
+    border-radius: 10px; /*Šp‚ÌŠÛ‚İ*/
+}
+
+.Task {
+    margin: 0;
+    padding: 0;
+}

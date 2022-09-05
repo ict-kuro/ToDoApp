@@ -1,0 +1,118 @@
+﻿@model ToDo_App.ViewModels.Register.addForm
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style>
+        .item {
+            width: 70%;
+            height: 100px;
+            border: 1px solid gray;
+        }
+
+        .over {
+            background-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .box {
+            width: 70%;
+            height: 100px;
+            border: 1px solid gray;
+            display: flex;
+            flex-flow: row wrap;
+        }
+    </style>
+    
+</head>
+
+<body>
+    <form asp-action="Register" method="post" enctype = "multipart/form-data">
+        <h1>タスク新規登録ページ</h1>
+        <hr />
+        <div class="register_form">
+            <p style="color: red">@ViewData["message"]</p>
+            @*<p>ユーザー名：@ViewData["UserId"]</p>*@
+            <p>タスク名<br />
+            <input asp-for = "Taskname"/></p>
+            <span asp-validation-for="Taskname" class="text-danger"></span>
+            <p>期限<br />
+                <input asp-for="StartDate"> ～ <input asp-for="DeadlineDate" />
+            </p>
+            <span asp-validation-for="StartDate" class="text-danger"></span>
+            <span asp-validation-for="DeadlineDate" class="text-danger"></span>
+        
+            <p>
+                コメント - <span style="color: gray">任意</span><br />
+                <textarea asp-for="Comment" style="width: 70%; height: 100px;"></textarea>
+            </p>
+            <span asp-validation-for="Comment"></span>
+            <p>
+                画像 - <span style="color: gray">任意</span><br />
+                <input asp-for="ImageFile" id="image_name" type="file" accept=".jpg, .png, .gif" />
+                <p class="sample">
+                  <img class="sample" id="preview">
+                </p>
+                <script type="text/javascript">
+                  $('#image_name').on('change', function (e) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#preview").attr('src', e.target.result);
+                        //console.log(e.target.result);
+                        document.getElementById("image_data").value = e.target.result;
+                        //console.log(document.getElementById("image_data").value);
+                    } 
+                    reader.readAsDataURL(e.target.files[0]);
+                  });
+                </script>
+                <input name="image_data" id="image_data" type="hidden" />
+            </p>
+            <p>
+                グループ - <span style="color: gray">任意</span><br />
+                <select asp-for="GroupId" asp-items="ViewBag.groupID"></select>
+                <span asp-validation-for="GroupId" class="text-danger"></span>
+            </p>
+            <p>
+               優先度　：
+            <select name="Priority">
+                <option value=3>高</option>
+                <option value=2 selected>中</option>
+                <option value=1>低</option>
+            </select>
+                <span asp-validation-for="Priority" class="text-danger"></span>
+            </p>
+            <p>
+                <button type="button" style="border:1px solid gray;" onclick="history.back()">戻る</button>
+                <input type="submit" name="登録" value="登録"/>
+            </p>
+        </div>
+    </form>
+    
+    <script type="text/javascript">
+        (function () {
+            console.log(document.getElementById("StartDate").value);
+            var today = new Date();
+            today.setDate(today.getDate());
+            var yyyy = today.getFullYear();
+            var MM = ("0" + (today.getMonth() + 1)).slice(-2);
+            var dd = ("0" + today.getDate()).slice(-2);
+            var hh = today.getHours();
+            var mm = today.getMinutes();
+            document.getElementById("StartDate").value = yyyy + '-' + MM + '-' + dd + 'T' + hh + ':' + mm;
+        })();
+        (function () {
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1); //翌日の日付を取得
+            var yyyy = tomorrow.getFullYear();
+            var MM = ("0" + (tomorrow.getMonth() + 1)).slice(-2);
+            var dd = ("0" + tomorrow.getDate()).slice(-2);
+            var hh = tomorrow.getHours();
+            var mm = tomorrow.getMinutes();
+            document.getElementById("DeadlineDate").value = yyyy + '-' + MM + '-' + dd + 'T' + hh + ':' + mm;
+            console.log(document.getElementById("DeadlineDate").value);
+        })();
+    </script>
+    
+</body>
