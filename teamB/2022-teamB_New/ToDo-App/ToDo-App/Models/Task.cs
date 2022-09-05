@@ -14,7 +14,7 @@ namespace ToDo_App.Models
         [Unicode(false)]
         public string UserId { get; set; } = null!;
         [Column("register_date", TypeName = "datetime")]
-        public DateTime RegisterDate { get; set; }
+        public DateTime? RegisterDate { get; set; }
         [Column("deadline_date", TypeName = "datetime")]
         public DateTime DeadlineDate { get; set; }
         [Column("start_date", TypeName = "datetime")]
