@@ -9979,11 +9979,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\murairen\\Desktop\\To Do\\ToDo\\ToDo.csproj",
+      "projectUniqueName": "C:\\Users\\murairen\\Intern\\ToDoApp\\teamA\\To Do\\ToDo\\ToDo.csproj",
       "projectName": "ToDo",
-      "projectPath": "C:\\Users\\murairen\\Desktop\\To Do\\ToDo\\ToDo.csproj",
+      "projectPath": "C:\\Users\\murairen\\Intern\\ToDoApp\\teamA\\To Do\\ToDo\\ToDo.csproj",
       "packagesPath": "C:\\Users\\murairen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\murairen\\Desktop\\To Do\\ToDo\\obj\\",
+      "outputPath": "C:\\Users\\murairen\\Intern\\ToDoApp\\teamA\\To Do\\ToDo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\murairen\\AppData\\Roaming\\NuGet\\NuGet.Config",
