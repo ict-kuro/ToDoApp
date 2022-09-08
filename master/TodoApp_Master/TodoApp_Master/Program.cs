@@ -1,7 +1,11 @@
+using Microsoft.Data.SqlClient;
+using TodoApp_Master.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<TodoAppContext>(provider => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
 var app = builder.Build();
 
