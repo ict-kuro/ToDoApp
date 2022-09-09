@@ -9,6 +9,11 @@ namespace TodoApp_Master.Models
     [Table("User")]
     public partial class User
     {
+        public User()
+        {
+            TaskTables = new HashSet<TaskTable>();
+        }
+
         [Key]
         [StringLength(255)]
         [Unicode(false)]
@@ -16,5 +21,8 @@ namespace TodoApp_Master.Models
         [StringLength(255)]
         [Unicode(false)]
         public string Password { get; set; } = null!;
+
+        [InverseProperty("User")]
+        public virtual ICollection<TaskTable> TaskTables { get; set; }
     }
 }

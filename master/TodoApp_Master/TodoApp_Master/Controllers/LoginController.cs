@@ -36,7 +36,7 @@ namespace TodoApp_Master.Controllers
             if (user != null)
             {
                 //セッションにログインIDを保存
-                //HttpContext.Session.SetString(SetSession.SessionUserId, user.UserId);
+                HttpContext.Session.SetString(SetSession.SessionUserId, user.UserId);
 
                 //ログイン時に画像を保存するディレクトリがなければディレクトリ作成を行う
                 string filePath1 = "wwwroot/IMG";
@@ -76,9 +76,6 @@ namespace TodoApp_Master.Controllers
         [HttpPost]
         public async Task<IActionResult> UserRegister(LoginRegister loginRegister)
         {
-            int name_len;
-            int pass_len;
-
             if (!ModelState.IsValid)
             {
                 return View("UserRegister", loginRegister);
