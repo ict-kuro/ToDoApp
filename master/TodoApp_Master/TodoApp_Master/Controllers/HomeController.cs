@@ -22,7 +22,7 @@ namespace TodoApp_Master.Controllers
         public IActionResult Index(TaskHome taskHome)
         {
             //ログイン状態を確認
-            taskHome.LoginStatus = Misc.IsLogin(HttpContext.Session.GetString("UserId"));
+            taskHome.LoginStatus = Misc.IsLogin(SetSession.SessionUserId);
            
             return View(taskHome);
         }
