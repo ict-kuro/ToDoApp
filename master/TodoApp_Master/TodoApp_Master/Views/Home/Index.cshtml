@@ -1,8 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "TodoApp";
+    @model TodoApp_Master.ViewModels.TaskHome;
+    @*タスク表示とカレンダー表示を行うページ*@
 }
+@if(!@Model.LoginStatus){
+    <body>
+        <p>ログインが必要なページです</p>
+        <a asp-controller="/Login" asp-action="Index">ログイン＆新規登録はこちらから</a>
+    </body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+}

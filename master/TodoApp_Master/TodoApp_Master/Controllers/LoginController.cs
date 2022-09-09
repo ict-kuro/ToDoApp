@@ -54,7 +54,7 @@ namespace TodoApp_Master.Controllers
                 }
 
                 //ログイン成功時はタスク表示画面へ移動
-                return RedirectToAction("Index", "Login");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
