@@ -1,9 +1,23 @@
 using Microsoft.Data.SqlClient;
 using TodoApp_Master.Models;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//セッション保存のため追加
+builder.Services.AddDistributedMemoryCache();
+
+//セッション処理の設定
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(180);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 
 builder.Services.AddDbContext<TodoAppContext>(provider => new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
@@ -24,8 +38,11 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+//セッションの使用を設定
+app.UseSession();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();

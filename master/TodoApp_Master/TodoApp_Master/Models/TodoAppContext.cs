@@ -16,19 +16,31 @@ namespace TodoApp_Master.Models
         {
         }
 
+        public virtual DbSet<TaskTable> TaskTables { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("data source=192.168.28.62;initial catalog=TodoApp;User ID=sa;Password=IctxIct0;TrustServerCertificate=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TaskTable>(entity =>
+            {
+                entity.Property(e => e.Priority).HasDefaultValueSql("((2))");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.TaskTables)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_TaskTable_User");
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

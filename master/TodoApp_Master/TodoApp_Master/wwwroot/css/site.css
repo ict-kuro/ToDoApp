@@ -61,3 +61,147 @@ body {
     transition: all 0.3 ease;
     cursor: pointer;
 }
+
+/* ヘッダー */
+.Home_header {
+    width: 100%;
+    height: 100px;
+    margin: 0 0 50px 0;
+    background-image: linear-gradient(45deg, #99FF99 0%, #99CC66 100%);
+    display: flex;
+    align-items: center;
+    font-size: 50px;
+}
+
+.title {
+    margin-top: 10px;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.detail_title {
+    margin: 10px auto;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.main-contents {
+    width: 100%;
+}
+
+.today {
+    font-size: 18px;
+    color: black;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+/* サイドメニュー領域 */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: #99CC66;
+    z-index: 999;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* サイドメニュー表示時に隠すためのブロックの設定 */
+.hide-contents {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    z-index: 998;
+}
+
+/*ハンバーガーメニュー*/
+.btn {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: solid 1px #26344a;
+    cursor: pointer;
+}
+
+.btn_text {
+    display: block;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+
+.btn_menu {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 2px;
+    background: #26344a;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition: all 0.5s;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+    .btn_menu::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: -8px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #26344a;
+        transition: all 0.5s;
+    }
+
+    .btn_menu::after {
+        display: block;
+        content: "";
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #26344a;
+        transition: all 0.5s;
+    }
+
+
+
+
+
+.btn {
+    margin: 10px 600px 0 10px;
+}
+
+    .btn:hover {
+        opacity: 0.7;
+    }
+
+.btn_text {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.a-task-menu {
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 10px;
+    color: black;
+}
