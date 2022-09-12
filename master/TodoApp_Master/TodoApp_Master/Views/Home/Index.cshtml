@@ -17,9 +17,15 @@
             var calendarEl = document.getElementById('calendar');
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
-                    left: 'prev,next today',
+                    right: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                    left: 'dayGridMonth,timeGridWeek,listMonth'
+                },
+                buttonText:{
+                 today:'今月',
+                 month:'月',
+                 week:'週',
+                 list:'リスト'
                 },
                 navLinks: true,
                 businessHours: true,
@@ -104,35 +110,27 @@ else{
 
                 <br>
             }
-            <form asp-action="AddTask" method="post" name="AddTask">
-                <div class="touroku_btn">
-                    <input type="submit" name="AddTask" class="btn-circle" value="+" />
+            <form id="f1" action="#">
+                <p><input type="submit" value="+" onclick="showForm()" /></p>
+                <div id="clicked">
+                    <div>
+                        <p>タスク名：&ensp;<input type="text" name="test"  value="task" id="addtask" /></p>
+                    </div>
+                    <div>
+                        <p>開始日時：&ensp;<input type="datetime-local"/></p>
+                    </div>
+                    <div>
+                        <p>終了日時：&ensp;<input type="datetime-local" /></p>
+                    </div>
+                    <div>
+                        <p>コメント：&ensp;<input type="text" placeholder="100文字以内で入力してください" size=50 /></p>
+                    </div>
                 </div>
             </form>
+            
         </div>
-
-        <!-- サイドメニュー領域 -->
-
-        <div class="side-menu" id="side-menu">
-            <b class="task_title">タスク一覧</b><br><br><br>
-
-            @foreach (var item in Model)
-            {
-                <a class="a-task-menu" asp-action="Detail" asp-route-id="@item.TaskId">@item.Priority : @item.TaskName</a>
-
-                <br>
-
-                <br>
-            }
-
-
-
-            <form asp-action="AddTask" method="post" name="AddTask">
-                <div class="touroku_btn">
-                    <input type="submit" name="AddTask" class="btn-circle" value="+" />
-                </div>
-            </form>
-        </div>
+        
+       
 
         <!-- サイドメニュー表示時の他領域を隠す用 -->
         <div class="hide-contents"></div>
@@ -143,7 +141,15 @@ else{
 
 
         <script type="text/javascript">
-
+             function hideForm(){
+                document.getElementById("clicked").style.display = "none";
+            }
+            function showForm() {
+                document.getElementById("clicked").style.display = "block";
+            }
+            window.onload = function(){
+                hideForm();
+            };
 
 
             $(function () {
@@ -189,6 +195,7 @@ else{
                             $(".hide-contents").css("display", "none");
                         });
                     isOpenSideMenu = false;
+                    
                 }
 
                 // コンテンツを切り替える処理
@@ -208,7 +215,16 @@ else{
                 });
 
                 // 非表示領域をクリックした際のイベント登録
-                $(".hide-contents").on("click", hideSideMenu);
+                $(".hide-contents").on("click",function(){
+                  if (isOpenSideMenu) {
+                       hideForm();
+                       hideSideMenu();
+
+                    } else {
+                       showSideMenu();
+                    }
+                
+                });
 
 
             });

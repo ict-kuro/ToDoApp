@@ -31,7 +31,7 @@ namespace TodoApp_Master.Controllers
                 End = e.DeadLine,
                 //color = e.TaskStatus ? "#aaaaaa" : e.ColorId,
                 //textColor = e.CompleteFlag ? "black" : "#34ebe8",
-                url = Url.Action("Detail", new { id = e.TaskId })
+                url = Url.Action("Index", new { id = e.TaskId })
             }).ToList();
             return Json(res);
         }
