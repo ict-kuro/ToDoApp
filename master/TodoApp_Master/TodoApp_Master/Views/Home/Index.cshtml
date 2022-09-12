@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "TodoApp";
-   
     @*タスク表示とカレンダー表示を行うページ*@
 }
 <head>
@@ -58,9 +57,8 @@ else{
     <body>
         <header class="Home_header">
             <!-- サイドバーの開閉ボタン -->
-            <div class="btn" id="button">
-                <button class="btn_menu" type="button">
-                    <span class="btn_text" id="btn_text">- Open -</span>
+            <div class="menu_btn" id="button">
+                <button class="menu_btn_menu" type="button">
                 </button>
             </div>
             <h1 class="title">Task Calender</h1>
@@ -74,7 +72,6 @@ else{
                     var year = today.getFullYear();
                     var month = today.getMonth() + 1;
                     var day = today.getDate();
-
                     document.write(year + "年" + month + "月" + day + "日");
                 </script>
             </span>
@@ -101,15 +98,23 @@ else{
 
         <div class="side-menu" id="side-menu">
             <b class="task_title">タスク一覧</b><br><br><br>
-
+            @*タスクのリスト表示*@
+            <form asp-action="Index" method="post">
             @foreach (var item in Model)
             {
-                <a class="a-task-menu" asp-action="Detail" asp-route-id="@item.TaskId">@item.Priority : @item.TaskName</a>
-
+                @*タスクが完了した場合のチェックボックス*@
+                <input type="checkbox" class="checkbox_style" name="comp" value="@item.TaskId">
+                <a asp-action="Index" asp-route-id="@item.TaskId" class="task_btn">
+                    <div style="text-align:left">
+                    タスク名:@item.TaskName<br>
+                    タスク期限:@item.DeadLine.Date
+                    </div>
+                </a>
                 <br>
-
                 <br>
             }
+            </form>
+
             <form id="f1" action="#">
                 <p><input type="submit" value="+" onclick="showForm()" /></p>
                 <div id="clicked">
@@ -205,7 +210,7 @@ else{
                 }
 
                 // サイドメニューボタンをクリックした際のイベント登録
-                $(".btn").on("click", function () {
+                $(".menu_btn").on("click", function () {
                     if (!isOpenSideMenu) {
                         showSideMenu();
 

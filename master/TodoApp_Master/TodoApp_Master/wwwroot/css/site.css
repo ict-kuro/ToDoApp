@@ -126,7 +126,7 @@ body {
 }
 
 /*ハンバーガーメニュー*/
-.btn {
+.menu_btn {
     position: relative;
     width: 60px;
     height: 60px;
@@ -135,14 +135,14 @@ body {
     margin-right:450px;
 }
 
-.btn_text {
+.menu_btn_text {
     display: block;
     overflow: hidden;
     text-indent: 100%;
     white-space: nowrap;
 }
 
-.btn_menu {
+.menu_btn_menu {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -159,8 +159,8 @@ body {
     transform: translate(-50%, -50%);
     cursor: pointer;
 }
-
-    .btn_menu::before {
+    /*ボタン内の線*/
+    .menu_btn_menu::before {
         display: block;
         content: "";
         position: absolute;
@@ -172,7 +172,7 @@ body {
         transition: all 0.5s;
     }
 
-    .btn_menu::after {
+    .menu_btn_menu::after {
         display: block;
         content: "";
         position: absolute;
@@ -184,17 +184,11 @@ body {
         transition: all 0.5s;
     }
 
-
-
-
-
-
-
-    .btn:hover {
+    .menu_btn:hover {
         opacity: 0.7;
     }
 
-.btn_text {
+.menu_btn_text {
     font-size: 25px;
     font-weight: bold;
 }
@@ -205,3 +199,43 @@ body {
     margin-left: 10px;
     color: black;
 }
+
+
+/*タスク表示部分のボタン*/
+a.task_btn {
+    background: #eee;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 240px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    z-index: 0;
+    border-left: solid 5px #6bb6ff;
+}
+
+    a.task_btn:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 0;
+        display: block;
+        background: #6bb6ff;
+        transition: .3s;
+        left: 0;
+    }
+
+    a.task_btn:hover {
+        color: #FFF;
+    }
+
+        a.task_btn:hover:before {
+            width: 100%;
+            z-index: -1;
+        }
+         
