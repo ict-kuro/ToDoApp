@@ -62,5 +62,14 @@ namespace TodoApp_Master.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        //タスク登録ウインドウ処理
+        public IActionResult ShowModal()
+        {
+            var userid = HttpContext.Session.GetString(SetSession.SessionUserId);
+            var user = _db.Users.Where(x => x.UserId == userid).FirstOrDefault();
+
+            return PartialView("_Modal",user);
+        }
     }
 }

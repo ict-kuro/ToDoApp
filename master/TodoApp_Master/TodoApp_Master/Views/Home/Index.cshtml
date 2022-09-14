@@ -42,7 +42,6 @@
             });
             calendar.render();
         });
-
     </script>
 
 </head>
@@ -92,6 +91,29 @@ else{
             setInterval('showClock()', 1000);
         </script>
 
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            タスク登録
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">タスク登録</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        タスク名
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                        <button type="button" class="btn btn-primary">保存する</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         <!-- サイドメニュー領域 -->
@@ -115,23 +137,6 @@ else{
             }
             </form>
 
-            <form id="f1" action="#">
-                <p><input type="submit" value="+" onclick="showForm()" /></p>
-                <div id="clicked">
-                    <div>
-                        <p>タスク名：&ensp;<input type="text" name="test"  value="task" id="addtask" /></p>
-                    </div>
-                    <div>
-                        <p>開始日時：&ensp;<input type="datetime-local"/></p>
-                    </div>
-                    <div>
-                        <p>終了日時：&ensp;<input type="datetime-local" /></p>
-                    </div>
-                    <div>
-                        <p>コメント：&ensp;<input type="text" placeholder="100文字以内で入力してください" size=50 /></p>
-                    </div>
-                </div>
-            </form>
             
         </div>
         
@@ -146,16 +151,17 @@ else{
 
 
         <script type="text/javascript">
-             function hideForm(){
-                document.getElementById("clicked").style.display = "none";
+          
+            function openModal(){
+                const url = new URL(window.location.href) + '/ShowModal';
+                $.ajax({
+                    url: url,
+                    type: 'POST'
+                }).done(function(){
+                    $('#setmodal').html(data);
+                    $('#setmodal').find('.modal').modal('show');
+                });
             }
-            function showForm() {
-                document.getElementById("clicked").style.display = "block";
-            }
-            window.onload = function(){
-                hideForm();
-            };
-
 
             $(function () {
 
@@ -220,18 +226,9 @@ else{
                 });
 
                 // 非表示領域をクリックした際のイベント登録
-                $(".hide-contents").on("click",function(){
-                  if (isOpenSideMenu) {
-                       hideForm();
-                       hideSideMenu();
+                $(".hide-contents").on("click", hideSideMenu);
 
-                    } else {
-                       showSideMenu();
-                    }
-                
-                });
-
-
+               
             });
         </script>
 
